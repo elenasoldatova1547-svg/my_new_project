@@ -1,0 +1,24 @@
+
+import json
+
+purchases = {}
+
+with open('purchase_log.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        line = line.strip()
+        if not line:
+            continue
+
+        # Разделяем строку: сначала пробуем запятую, потом таб, потом пробел
+        if ',' in line:
+            key, value = line.split(',', 1)
+        elif '\t' in line:
+            key, value = line.split('\t', 1)
+        else:
+            key, value = line.split(' ', 1)
+
+        purchases[key.strip()] = value.strip()
+
+# Вывод первых двух элементов
+for key, value in list(purchases.items())[:2]:
+    print(key, value)
